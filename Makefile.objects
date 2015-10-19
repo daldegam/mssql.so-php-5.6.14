@@ -1,0 +1,8 @@
+php_mssql.lo: /Users/daldegam/Desktop/php-5.6.14/ext/mssql/php_mssql.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/daldegam/Desktop/php-5.6.14/ext/mssql $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/daldegam/Desktop/php-5.6.14/ext/mssql/php_mssql.c -o php_mssql.lo 
+$(phplibdir)/mssql.la: ./mssql.la
+	$(LIBTOOL) --mode=install cp ./mssql.la $(phplibdir)
+
+./mssql.la: $(shared_objects_mssql) $(MSSQL_SHARED_DEPENDENCIES)
+	$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_mssql) $(MSSQL_SHARED_LIBADD)
+
